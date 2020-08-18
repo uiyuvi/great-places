@@ -34,7 +34,9 @@ const PlacesNavigator = () => {
                     <Item title="cart" iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'} onPress={() => navigation.toggleDrawer()}></Item>
                 </HeaderButtons>)
             })} />
-            <PlacesStack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
+            <PlacesStack.Screen name="PlaceDetail" component={PlaceDetailScreen} options={({route}) => ({
+                title: route.params.title
+            })}/>
             <PlacesStack.Screen name="Map" component={MapScreen} />
             <PlacesStack.Screen name="NewPlace" component={NewPlaceScreen} options={() => ({
                 title: "Add Place"

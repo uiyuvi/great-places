@@ -4,13 +4,22 @@ import { FlatList } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import PlaceItem from '../components/PlaceItem';
 
-const PlacesScreen = () => {
+const PlacesScreen = (props) => {
     const places = useSelector(state => state.places.places)
     return (
         <View>
             <FlatList
                 data={places}
-                renderItem={itemData => <PlaceItem onSelect={() => { }} image={null} title={itemData.item.title} address={null} />}
+                renderItem={itemData => <PlaceItem
+                    onSelect={() => {
+                        props.navigation.navigate("PlaceDetail", {
+                            title: itemData.item.title,
+                            id: itemData.item.id
+                        })
+                    }}
+                    image={null}
+                    title={itemData.item.title}
+                    address={null} />}
             />
         </View>
     )
