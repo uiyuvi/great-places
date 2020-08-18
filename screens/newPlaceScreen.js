@@ -3,12 +3,14 @@ import { View, Text, ScrollView, StyleSheet, TextInput, Button } from "react-nat
 import { COLORS } from '../constants/colors';
 import { useDispatch } from 'react-redux';
 import { addPlace } from '../redux/actions/placesAction';
+import ImgPicker from '../components/ImgPicker';
 
 const NewPlaceScreen = (props) => {
     const [title, setTitle] = useState("");
+    const [image, setImage] = useState("");
     const dispatch = useDispatch();
     const savePlaceHandler = () => {
-        dispatch(addPlace(title));
+        dispatch(addPlace(title, image));
         props.navigation.goBack();
     };
     return (
@@ -16,6 +18,7 @@ const NewPlaceScreen = (props) => {
             <View style={styles.form}>
                 <Text style={styles.label}>Title</Text>
                 <TextInput style={styles.textInput} value={title} onChangeText={text => setTitle(text)} />
+                <ImgPicker style={styles.imagePicker} onImageTaken={(image)=>setImage(image)}/>
                 <Button title="save place" onPress={savePlaceHandler} color={COLORS.primary} />
             </View>
         </ScrollView>
@@ -38,5 +41,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 2,
         borderBottomWidth: 1,
         borderBottomColor: "#ccc"
+    },
+    imagePicker: {
+        marginBottom: 15
     }
 })
