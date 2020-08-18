@@ -24,6 +24,7 @@ const PlacesNavigator = () => {
     return (
         <PlacesStack.Navigator screenOptions={NavigationOptions} >
             <PlacesStack.Screen name="Places" component={PlacesScreen} options={({ navigation }) => ({
+                title: "Places",
                 headerRight: () => (<HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                     <Item title="cart" iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'} onPress={() => {
                         navigation.navigate("NewPlace")
@@ -35,7 +36,9 @@ const PlacesNavigator = () => {
             })} />
             <PlacesStack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
             <PlacesStack.Screen name="Map" component={MapScreen} />
-            <PlacesStack.Screen name="NewPlace" component={NewPlaceScreen} />
+            <PlacesStack.Screen name="NewPlace" component={NewPlaceScreen} options={() => ({
+                title: "Add Place"
+            })} />
         </PlacesStack.Navigator>
     )
 }
